@@ -1,0 +1,17 @@
+{
+  "name": "express-middleware-and-code-architecture",
+  "version": "1.0.0",
+  "description": "This manual outlines the tasks for implementing an Express.js application using the specified folder structure, middlewares, CRUD operations, and Zod validation.",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.21.1",
+    "zod": "^3.23.8"
+  }
+}
