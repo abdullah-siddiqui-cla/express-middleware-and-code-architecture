@@ -95,3 +95,29 @@ Validation: Requires title (string, non-empty) and body (string, non-empty).
 # Additional Notes
 Ensure modularity by separating concerns into middlewares, services, validation, and controllers.
 Test using Postman or any REST API tool.
+
+# Convert In-Memory Posts to MongoDB
+
+## Objective
+Refactor the existing `posts.service.js` to replace the in-memory posts array with MongoDB as the data source.
+
+## Steps
+### Set Up MongoDB:
+Ensure that you have MongoDB running locally or provide access to a cloud-based MongoDB instance (e.g., MongoDB Atlas).
+
+### Integrate Mongoose:
+Update the service to use `Mongoose` for data modeling and CRUD operations.
+
+### Define a Post Model:
+- Create a `Mongoose` schema for `Post` with `title (string, required)` and `body (string, required)`.
+- Refactor CRUD Functions: Replace operations on the posts array with MongoDB queries using `Mongoose` methods like `save`, `find`, `findById`, `findByIdAndUpdate`, and `findByIdAndDelete`.
+
+### Preserve Functionality:
+- The refactored service should have the same exported methods (`create`, `findAll`, `findById`, `update`, `delet`).
+- Ensure the function signatures and expected inputs/outputs stay the same.
+
+### Add Error Handling:
+Handle errors such as database connection failures or validation errors.
+
+### Test the Refactored Code:
+Write a small script to test the refactored service with sample data.
