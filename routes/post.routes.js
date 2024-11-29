@@ -7,16 +7,17 @@ import {
   delet as postControllerDelete,
 } from "../modules/posts/posts.controller.js";
 import authMiddleware from "../middlewares/auth.middleware.js";
-import { validateCreatePost } from "../modules/posts/post.validation.js";
+import { validateCreatePost, validateId } from "../modules/posts/post.validation.js";
 
 const router = express.Router();
 
-router.use(authMiddleware);
+// Note: Disabling authentication for now
+// router.use(authMiddleware);
 
 router.post("/", validateCreatePost, create);
 router.get("/", findAll);
-router.get("/:id", findById);
-router.put("/:id", update);
-router.delete("/:id", postControllerDelete);
+router.get("/:id", validateId, findById);
+router.put("/:id", validateId, update);
+router.delete("/:id", validateId, postControllerDelete);
 
 export default router;
