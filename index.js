@@ -2,8 +2,11 @@ import express from 'express';
 import loggerMiddleware from './middlewares/logger.middleware.js';
 import errorMiddleware from './middlewares/error.middleware.js';
 import postRoutes from './routes/post.routes.js';
+import connectDB from './db.js';
 
 const app = express();
+
+connectDB();
 
 app.use(express.json());
 app.use(loggerMiddleware);
