@@ -11,8 +11,7 @@ import { validateCreatePost, validateId } from "../modules/posts/post.validation
 
 const router = express.Router();
 
-// Note: Disabling authentication for now
-// router.use(authMiddleware);
+router.use(authMiddleware);
 
 router.post("/", validateCreatePost, create);
 router.get("/", findAll);
