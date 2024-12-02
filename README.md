@@ -121,3 +121,48 @@ Handle errors such as database connection failures or validation errors.
 
 ### Test the Refactored Code:
 Write a small script to test the refactored service with sample data.
+
+
+# User Authentication and Authorization Exercise
+In this exercise, we'll extend the posts API to include user authentication and authorization. We’ll add user registration, login functionality, and protect the posts routes using JWT-based authentication.
+
+## Objective
+- Create a User model with username and password. You can do it inside `/modules/users/services/users.service.js`
+- Hash passwords securely before storing them in the database.
+- Implement a route for user registration (POST /user).
+- Implement a route for user login (POST /login), which returns a signed JWT token.
+- Modify the `auth` middleware to authenticate requests using the token.
+- Protect all posts routes using the authentication middleware.
+
+## Steps
+### 1. Create the User Model
+- Define a User schema with the following fields:
+    - username: String, unique, required, trimmed.
+    - password: String, required.
+
+### 2. Set Up the `/user` Route
+- Create a `/modules/users/users.controllers.js` file.
+- Write a function for registering a user:
+  - Check if the username is already taken.
+  - Hash the password
+  - Save the user in the database.
+  - Return a success response.
+  - Define a `POST /user` route in `routes/user.routes.js` to call this controller.
+
+### 3. Implement the /login Route
+- Add a login function in controllers/users.controller.js:
+  - Find the user by `username`.
+  - Verify the password using `bcrypt`.
+- If valid, generate a signed JWT token (use `jsonwebtoken` library).
+  - Return the token in the response.
+  - Add a `POST /login` route in `routes/user.routes.js` for login.
+
+### 4. Modify Authentication Middleware
+- Extract the JWT token from the Authorization header.
+- Verify the token using the secret key.
+- Attach the decoded user data to `req.user`.
+- Return a `401` or `403` error if the token is missing or invalid.
+
+### 5. Protect the Posts Routes
+Import the authenticate middleware in `routes/posts.routes.js`.
+Apply the middleware to all posts routes to ensure only authenticated users can access them.
