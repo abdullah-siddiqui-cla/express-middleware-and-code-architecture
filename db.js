@@ -1,7 +1,10 @@
 import mongoose from 'mongoose';
+import dotenv from "dotenv";
+
+dotenv.config();
 
 // Replace with your MongoDB URI
-const MONGO_URI = "mongodb://127.0.0.1:27017/demo"; // Local
+const MONGO_URI = process.env.MONGO_URI; // Local
 // const MONGO_URI = "mongodb+srv://<username>:<password>@cluster0.mongodb.net/myDatabase"; // Atlas
 
 const connectDB = async () => {

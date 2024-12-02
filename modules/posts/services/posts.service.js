@@ -1,28 +1,32 @@
-import { posts } from "./posts.data.js";
+import mongoose from 'mongoose';
 
-export const create = (post) => {
-  post.id = posts.length + 1;
-  posts.push(post);
-  return post;
+// Step 1: Define the schema
+const postSchema = new mongoose.Schema({
+  title: { type: String, required: true },
+  body: { type: String, required: true },
+});
+
+// Step 2: Create the model
+const Post = mongoose.model('Post', postSchema);
+
+// Step 3: Refactor the CRUD functions
+export const create = async (post) => {
+  const newPost = new Post(post);
+  return await newPost.save();
 };
 
-export const findAll = () => {
-  return posts;
+export const findAll = async () => {
+  return await Post.find();
 };
 
-export const findById = (id) => {
-  return posts.find((post) => post.id === id);
+export const findById = async (id) => {
+  return await Post.findById(id);
 };
 
-export const update = (id, updatedPost) => {
-  const index = posts.findIndex((post) => post.id === id);
-  if (index === -1) return null;
-  posts[index] = { ...posts[index], ...updatedPost };
-  return posts[index];
+export const update = async (id, updatedPost) => {
+  return await Post.findByIdAndUpdate(id, updatedPost, { new: true });
 };
 
-export const delet = (id) => {
-  const index = posts.findIndex((post) => post.id === id);
-  if (index === -1) return null;
-  return posts.splice(index, 1)[0];
+export const delet = async (id) => {
+  return await Post.findByIdAndDelete(id);
 };
